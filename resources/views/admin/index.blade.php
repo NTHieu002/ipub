@@ -14,6 +14,9 @@
   <!-- Nucleo Icons -->
   <link href="{{ asset('/public/admin/assets/css/nucleo-icons.css') }}" rel="stylesheet" />
   <link href="{{ asset('/public/admin/assets/css/nucleo-svg.css') }}" rel="stylesheet" />
+  {{-- epub.js --}}
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.5/jszip.min.js"></script>
+  <script src="{{ URL::to('https://cdn.jsdelivr.net/npm/epubjs/dist/epub.min.js') }}"></script>
   <!-- Font Awesome Icons -->
   <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
   <script src="{{ asset('/public/admin/assets/js/argon-dashboard.min.js') }}"></script>

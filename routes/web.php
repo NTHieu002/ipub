@@ -29,7 +29,11 @@ Route::get('/admin/accessory', [AdminController::class, 'accessory']);
 // --ADMIN - BOOK
 
 Route::post('/store-book', [BooksController::class, 'store']);
-
+Route::get('/delete-book/{id}', [BooksController::class, 'destroy']);
+Route::get('/book-offline/{id}', [BooksController::class, 'offline']);
+Route::get('/book-online/{id}', [BooksController::class, 'online']);
+Route::get('/admin/book/edit-book/{id}', [BooksController::class, 'edit']);
+Route::post('/store-book-update/{id}', [BooksController::class, 'store_update']);
 // --END ADMIN _ BOOK
 
 // END ADMIN
@@ -55,7 +59,7 @@ Route::get('/category/{slug_cate}', [CategoryController::class, 'index_category_
 // CUSTOMER
 Route::get('/', [HomeController::class, 'index']);
 Route::get('/home', [HomeController::class, 'index'])->name('home');
-Route::get('/test', [HomeController::class, 'test']);
+
 
 
 Route::get('/my-library/{id}', [UserLibraryController::class, 'index']);
