@@ -200,7 +200,7 @@
     
         var rendition = book.renderTo("viewer", {
           width: "100%",
-          height: 500,
+          height: 620,
           ignoreClass: 'annotator-hl',
            manager: "continuous",
         //   flow: "scrolled-doc"

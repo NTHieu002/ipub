@@ -12,11 +12,16 @@
                             Add New
                         </a>
                     </h6>
+                    @if (session('status'))
+                    <div id="alert" class="alert alert-success col-md-6 float-right">
+                        {{ session('status') }}
+                    </div>
+                    @endif
                 </div>
                 @foreach ($cate as $book_cate_item)
                     <div class="card-body px-0 pt-0 pb-2">
                         <h6 class="text-uppercase text-secondary text-x font-weight-bolder opacity-9 text-black"
-                            style="margin-left: 23px">{{ $book_cate_item['category_name'] }} / {{ $book_cate_item->books_count }} Books</h6>
+                            style="margin-left: 23px">{{ $book_cate_item['category_name'] }} / <span class="text-white badge badge-sm bg-gradient-info">{{ $book_cate_item->books_count }}</span> Books</h6>
 
                         <div class="table-responsive p-0">
                             <table class="table align-items-center mb-0">
@@ -97,11 +102,7 @@
             </div>
         </div>
     </div>
-    @if (session('status'))
-        <div id="alert" class="alert alert-success col-md-6 float-right">
-            {{ session('status') }}
-        </div>
-    @endif
+   
     <script type="text/javascript">
         @foreach ($cate as $book_cate_item )
             @foreach ($book_cate_item->books as $ebook )
@@ -124,7 +125,7 @@
 
     </script>
     <script type="text/javascript">
-        const myTimeout = setTimeout(nofty, 2000);
+        const myTimeout = setTimeout(nofty, 1500);
 
         function nofty() {
             try {
