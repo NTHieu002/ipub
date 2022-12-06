@@ -4,7 +4,7 @@
 
 @include('cus.layouts.banner')
 
-<div class="section">
+{{-- <div class="section">
     <div class="container">
         <div class="row mb-5 align-items-center">
             <div class="col-lg-6">
@@ -40,7 +40,6 @@
                                         </div>
 
                                         <a href="{{'./book/'. $ebook->book_slug }}" class="btn btn-primary py-2 px-3">Read book</a>
-                                        <a href="{{'./add-to-library/'. $ebook->id }}" class="btn btn-primary py-2 px-3" style="float: right">Add to library</a>
                                     </div>
                                 </div>
                             </div>
@@ -59,9 +58,10 @@
 
         </div>
     </div>
+</div> --}}
+<div class="col-lg-7 mx-auto text-center">
+    <h2 class="mb-4 mt-4">You searched with keyword: {{ $key }}</h2>
 </div>
-
-
 @include('cus.layouts.feartures')
 
 <div class="section">
@@ -77,19 +77,19 @@
     @foreach ($books as $ebook )
         var book_{{ $ebook->id }} = ePub("./public/uploads/books/{{ $ebook->book }}");
         
-        var cover_{{ $ebook->id }} = document.getElementById("cover-{{ $ebook->id }}");
+        // var cover_{{ $ebook->id }} = document.getElementById("cover-{{ $ebook->id }}");
         var img_cover_{{ $ebook->id }} = document.getElementById("img-cover-{{ $ebook->id }}");
         book_{{ $ebook->id }}.coverUrl().then(function(url){
-            cover_{{ $ebook->id }}.src = url;
+            // cover_{{ $ebook->id }}.src = url;
             img_cover_{{ $ebook->id }}.src = url;
         })
-        var title_{{ $ebook->id }} = document.getElementById("title-{{ $ebook->id }}");
-        var author_{{ $ebook->id }} = document.getElementById("author-{{ $ebook->id }}");
-        book_{{ $ebook->id }}.loaded.metadata.then(function(meta){
-            title_{{ $ebook->id }}.textContent = meta.title;
-            author_{{ $ebook->id }}.textContent = meta.creator;
-            // console.log(meta);
-        })
+        // var title_{{ $ebook->id }} = document.getElementById("title-{{ $ebook->id }}");
+        // var author_{{ $ebook->id }} = document.getElementById("author-{{ $ebook->id }}");
+        // book_{{ $ebook->id }}.loaded.metadata.then(function(meta){
+        //     title_{{ $ebook->id }}.textContent = meta.title;
+        //     author_{{ $ebook->id }}.textContent = meta.creator;
+        //     // console.log(meta);
+        // })
 
         
     @endforeach

@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Models\Userlibrary;
 use App\Models\Books;
 use Faker\Provider\UserAgent;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class UserLibraryController extends Controller
@@ -129,5 +130,16 @@ class UserLibraryController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function store_library($book_id) {
+        $user_librarry = new Userlibrary();
+        $user_id = Auth::user()->id;
+
+        $user_librarry->user_id = $user_id;
+        $user_librarry->book_id = $book_id;
+
+        $user_librarry->save();
+        return redirect('/my-library/'.$user_id);
     }
 }

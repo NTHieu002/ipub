@@ -20,11 +20,16 @@ use App\Http\Controllers\Controller;
 |
 */
 // ADMIN
-Route::get('/admin', [AdminController::class, 'index']);
+// Route::get('/admin', [AdminController::class, 'index']);
 Route::get('/admin', [AdminController::class, 'dashboard']); 
 Route::get('/admin/profile', [AdminController::class, 'profile']);
 Route::get('/admin/books', [AdminController::class, 'books']);
 Route::get('/admin/accessory', [AdminController::class, 'accessory']);
+Route::get('/admin/banner', [AdminController::class, 'banner']);
+Route::get('/admin/banner-upload', [AdminController::class, 'banner_upload']);
+Route::post('/store-banner', [AdminController::class, 'store_banner']);
+Route::get('/banner-offline/{id}', [AdminController::class, 'offline']);
+Route::get('/banner-online/{id}', [AdminController::class, 'online']);
 
 // --ADMIN - BOOK
 
@@ -60,10 +65,12 @@ Route::get('/category/{slug_cate}', [CategoryController::class, 'index_category_
 Route::get('/', [HomeController::class, 'index']);
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 
-
+Route::get('/search', [HomeController::class, 'search']);
 
 Route::get('/my-library/{id}', [UserLibraryController::class, 'index']);
 Route::post('/store-book-user/{user_id}', [UserLibraryController::class, 'store']);
+Route::get('/add-to-library/{book_id}', [UserLibraryController::class, 'store_library']);
+
 
 Route::get('/book/{slug}', [BookViewController::class, 'show_book']);
 

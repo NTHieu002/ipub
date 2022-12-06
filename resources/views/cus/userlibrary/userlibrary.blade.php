@@ -12,7 +12,7 @@
                         <ol class="breadcrumb text-center justify-content-center" style="font-size: 30px">
                             <li class="breadcrumb-item "><a href="{{ url('/') }}">Home</a></li>
                             <li class="breadcrumb-item text-white-50 ">My Library</li>
-                            <li class="breadcrumb-item active text-white-50" aria-current="page">Welcom Back {{ $user->name }}</li>
+                            <li class="breadcrumb-item active text-white-50" aria-current="page">Welcome Back {{ $user->name }}</li>
                         </ol>
                     </nav>
 

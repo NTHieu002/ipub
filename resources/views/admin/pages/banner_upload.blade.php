@@ -4,12 +4,12 @@
     <div class="col-12">
       <div class="card mb-4">
         <div class="card-header pb-0">
-          <h6>Upload eBook</h6>
+          <h6>Upload Banner</h6>
         </div>
         <div class="card-body px-0 pt-0 pb-2">
           <div class="table-responsive p-0">
             <div class="card-body">
-                <p class="text-uppercase text-sm">eBook Information</p>
+                <p class="text-uppercase text-sm">Choose Banner</p>
                 <div class="row">
                     @if ($errors->any())
                         <div class="alert alert-danger col-md-9">
@@ -25,21 +25,21 @@
                             {{ session('status')}}
                         </div>
                     @endif
-                    <form action="{{ url('/store-book') }}" method="post" enctype="multipart/form-data">
+                    <form action="{{ url('/store-banner') }}" method="post" enctype="multipart/form-data">
                         @csrf
-                        <div class="col-md-9">
+                        {{-- <div class="col-md-9">
                             <div class="form-group">
                                 <label for="book-name" class="form-control-label">Book Name</label>
                                 <input class="form-control" type="text" onkeyup="ChangeToSlug()" name="book-name" id="slug">
                             </div>
-                        </div>
-                        {{-- <div class="col-md-9">
-                            <div class="form-group">
-                                <label for="book-img" class="form-control-label">Book Image</label>
-                                <input class="form-control" type="file" name="book_img" id="">
-                            </div>
                         </div> --}}
                         <div class="col-md-9">
+                            <div class="form-group">
+                                <label for="book-img" class="form-control-label">Banner Image</label>
+                                <input class="form-control" type="file" name="banner_img" id="">
+                            </div>
+                        </div>
+                        {{-- <div class="col-md-9">
                             <div class="form-group">
                                 <label for="book-desc" class="form-control-label">Book Description</label>
                                 <textarea class="form-control" type="text" name="book-desc" id=""></textarea>
@@ -56,7 +56,7 @@
                                 <label for="book-slug" class="form-control-label">Book Slug</label>
                                 <input class="form-control" type="text" name="book-slug" id="convert_slug">
                             </div>
-                        </div>
+                        </div> 
                         <div class="col-md-9">
                             <div class="form-group">
                                 <label for="book-status" class="form-control-label">Book Category</label>
@@ -67,8 +67,8 @@
                                     
                                 </select>
                             </div>
-                        </div>
-                        <div class="col-md-9">
+                        </div>  --}}  
+                        {{-- <div class="col-md-9">
                             <div class="form-group">
                                 <label for="book-status" class="form-control-label">Book Status</label>
                                 <select class="form-control" name="book-status" id=""> 
@@ -76,7 +76,7 @@
                                     <option value="1">UnActive</option>
                                 </select>
                             </div>
-                        </div>
+                        </div> --}}
                         <button type="submit" class="btn btn-primary btn-lg ms-auto" data-toggle="tooltip" data-original-title="Edit user">
                             Summit
                         </button>

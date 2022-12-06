@@ -66,11 +66,11 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link " href="./pages/billing.html">
+          <a class="nav-link " href="{{ URL::to('/admin/banner') }}">
             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
               <i class="ni ni-credit-card text-success text-sm opacity-10"></i>
             </div>
-            <span class="nav-link-text ms-1">Billing</span>
+            <span class="nav-link-text ms-1">Banner</span>
           </a>
         </li>
         <li class="nav-item">
@@ -100,7 +100,7 @@
             <span class="nav-link-text ms-1">Profile</span>
           </a>
         </li>
-        <li class="nav-item">
+        {{-- <li class="nav-item">
           <a class="nav-link " href="./pages/sign-in.html">
             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
               <i class="ni ni-single-copy-04 text-warning text-sm opacity-10"></i>
@@ -115,7 +115,7 @@
             </div>
             <span class="nav-link-text ms-1">Sign Up</span>
           </a>
-        </li>
+        </li> --}}
       </ul>
     </div>
   </aside>
@@ -139,9 +139,9 @@
           </div>
           <ul class="navbar-nav  justify-content-end">
             <li class="nav-item d-flex align-items-center">
-              <a href="javascript:;" class="nav-link text-white font-weight-bold px-0">
+              <a href=" {{ __('/ipub/admin/Login') }}" class="nav-link text-white font-weight-bold px-0">
                 <i class="fa fa-user me-sm-1"></i>
-                <span class="d-sm-inline d-none">Sign In</span>
+                <span class="d-sm-inline d-none">ADMIN</span>
               </a>
             </li>
             {{-- <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
@@ -247,10 +247,10 @@
   <script src="{{ asset('/public/admin/assets/js/plugins/smooth-scrollbar.min.js') }}"></script>
   <script src="{{ asset('/public/admin/assets/js/plugins/chartjs.min.js') }}"></script>
   <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
-  <script src="{{ URL::asset('public/admin/assets/js/argon-dashboard.js') }}"></script>
-  {{-- <script src="{{ URL::asset('public/admin/assets/js/argon-dashboard.min.js') }}"></script> --}}
+  <script src="{{ asset('public/admin/assets/js/argon-dashboard.js') }}"></script>
+  <script src="{{ asset('public/admin/assets/js/argon-dashboard.min.js') }}"></script>
   
-  {{-- <script>
+  <script>
     var ctx1 = document.getElementById("chart-line").getContext("2d");
 
     var gradientStroke1 = ctx1.createLinearGradient(0, 230, 0, 50);
@@ -332,7 +332,7 @@
         },
       },
     });
-  </script> --}}
+  </script>
   <script>
     var win = navigator.platform.indexOf('Win') > -1;
     if (win && document.querySelector('#sidenav-scrollbar')) {
