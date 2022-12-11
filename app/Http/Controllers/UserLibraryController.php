@@ -20,10 +20,18 @@ class UserLibraryController extends Controller
      */
     public function index($user_id)
     {
+        $user_id = Auth::user()->id;
+        // $user = DB::table('users')->join('images', 'images.user_id', '=', 'users.id')->where('users.id', '=', $user_id)->where('role_id','=',1)->first();
+        $image = DB::table('images')->where('user_id', '=', $user_id)->where('role_id', '=', 2)->first();
+        if($image) {
+
+        } else {
+            $image = DB::table('images')->where('user_id', '=', 0)->where('role_id', '=', 1)->first();
+        }
         $category = Category::where('category_status',0)->get();
         $user = User::where('id',$user_id)->first();
         $user_book = DB::table('books')->join('userlibrary','books.id','=','userlibrary.book_id')->where('userlibrary.user_id','=',$user_id)->get();
-        return view('cus.userlibrary.userlibrary')->with('cate', $category)->with('user', $user)->with('user_book',$user_book);
+        return view('cus.userlibrary.userlibrary')->with('cate', $category)->with('user_info', $user)->with('user_book',$user_book)->with('user',$image);
     }
 
     /**
@@ -84,7 +92,7 @@ class UserLibraryController extends Controller
         $userlibrary->save();
 
         
-        return view('cus.userlibrary.userlibrary')->with('user_book',$user_book)->with('status','upload success');
+        return redirect('/my-library/'.$user_id)->with('status','upload success');
     }
 
     /**

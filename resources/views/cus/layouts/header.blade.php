@@ -46,12 +46,13 @@
                     @else
                         <li class="has-children">
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    <img src="{{ asset('/public/images') }}/{{ $user->image }}" class="rounded-circle" style="width: 30px;" alt="Avatar" />
                                 {{ Auth::user()->name }}
                             </a>
 
                             <ul class="dropdown" aria-labelledby="navbarDropdown">
                                 <li>
-                                    <a  href="{{ url('/profile') }}">
+                                    <a  href="{{ url('/profile/'. Auth::user()->id) }}">
                                         Profile
                                      </a>
                                 </li>

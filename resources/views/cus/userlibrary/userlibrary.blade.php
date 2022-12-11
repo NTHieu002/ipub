@@ -12,7 +12,7 @@
                         <ol class="breadcrumb text-center justify-content-center" style="font-size: 30px">
                             <li class="breadcrumb-item "><a href="{{ url('/') }}">Home</a></li>
                             <li class="breadcrumb-item text-white-50 ">My Library</li>
-                            <li class="breadcrumb-item active text-white-50" aria-current="page">Welcome Back {{ $user->name }}</li>
+                            <li class="breadcrumb-item active text-white-50" aria-current="page">Welcome Back {{ $user_info->name }}</li>
                         </ol>
                     </nav>
 
@@ -72,7 +72,7 @@
 					</div>
 				</div>
 				<div class="col-lg-8" data-aos="fade-up" data-aos-delay="200" >
-					<form action="{{ url('/store-book-user/'.$user->id) }}" method="post" enctype="multipart/form-data">
+					<form action="{{ url('/store-book-user/'.$user_info->id) }}" method="post" enctype="multipart/form-data">
                         @csrf
                         @if ($errors->any())
                             <div class="alert alert-danger col-4">

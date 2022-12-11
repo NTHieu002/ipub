@@ -64,12 +64,15 @@ Route::get('/category/{slug_cate}', [CategoryController::class, 'index_category_
 // CUSTOMER
 Route::get('/', [HomeController::class, 'index']);
 Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::get('/profile/{user_id}', [HomeController::class, 'profile']);
+Route::post('/store-profile/{user_id}', [HomeController::class, 'store_profile']);
 
 Route::get('/search', [HomeController::class, 'search']);
 
 Route::get('/my-library/{id}', [UserLibraryController::class, 'index']);
 Route::post('/store-book-user/{user_id}', [UserLibraryController::class, 'store']);
 Route::get('/add-to-library/{book_id}', [UserLibraryController::class, 'store_library']);
+
 
 
 Route::get('/book/{slug}', [BookViewController::class, 'show_book']);

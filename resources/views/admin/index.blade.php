@@ -19,11 +19,13 @@
   <script src="{{ URL::to('https://cdn.jsdelivr.net/npm/epubjs/dist/epub.min.js') }}"></script>
   <!-- Font Awesome Icons -->
   <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
-  <script src="{{ asset('/public/admin/assets/js/argon-dashboard.min.js') }}"></script>
+  {{-- <script src="{{ asset('/public/admin/assets/js/argon-dashboard.js') }}"></script> --}}
   <link href="{{ asset('/public/admin/assets/css/nucleo-svg.css') }}" rel="stylesheet" />
   <link href="{{ asset('/public/admin/assets/css/argon-dashboard.css') }}" rel="stylesheet" />
+  {{-- <link href="{{ asset('/public/admin/assets/css/argon-dashboard.css.map') }}" rel="stylesheet" /> --}}
   <!-- CSS Files -->
   <link id="pagestyle" href="{{ asset('/public/admin/assets/css/argon-dashboard.css?v=2.0.4') }}" rel="stylesheet" />
+  <script  src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 
 </head>
@@ -42,7 +44,7 @@
     <div id="sidenav-collapse-main">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link active" href="{{ url('/admin') }}">
+          <a id="dashboard" class="nav-link active" href="{{ url('/admin') }}">
             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
               <i class="ni ni-tv-2 text-primary text-sm opacity-10"></i>
             </div>
@@ -50,7 +52,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link " href="{{url('/admin/books')}}">
+          <a id="books" class="nav-link " href="{{url('/admin/books')}}">
             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
               <i class="ni ni-calendar-grid-58 text-warning text-sm opacity-10"></i>
             </div>
@@ -58,7 +60,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link " href="{{url('/admin/accessory')}}">
+          <a id="accessory" class="nav-link " href="{{url('/admin/accessory')}}">
             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
               <i class="ni ni-calendar-grid-58 text-warning text-sm opacity-10"></i>
             </div>
@@ -66,7 +68,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link " href="{{ URL::to('/admin/banner') }}">
+          <a id="banner" class="nav-link " href="{{ URL::to('/admin/banner') }}">
             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
               <i class="ni ni-credit-card text-success text-sm opacity-10"></i>
             </div>
@@ -74,7 +76,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link " href="{{ url('/admin/category') }}">
+          <a id="category" class="nav-link " href="{{ url('/admin/category') }}">
             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
               <i class="ni ni-app text-info text-sm opacity-10"></i>
             </div>
@@ -144,7 +146,7 @@
                 <span class="d-sm-inline d-none">ADMIN</span>
               </a>
             </li>
-            {{-- <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
+            <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
               <a href="javascript:;" class="nav-link text-white p-0" id="iconNavbarSidenav">
                 <div class="sidenav-toggler-inner">
                   <i class="sidenav-toggler-line bg-white"></i>
@@ -152,7 +154,7 @@
                   <i class="sidenav-toggler-line bg-white"></i>
                 </div>
               </a>
-            </li> --}}
+            </li>
             <li class="nav-item px-3 d-flex align-items-center">
               <a href="javascript:;" class="nav-link text-white p-0">
                 <i class="fa fa-cog fixed-plugin-button-nav cursor-pointer"></i>
@@ -247,92 +249,11 @@
   <script src="{{ asset('/public/admin/assets/js/plugins/smooth-scrollbar.min.js') }}"></script>
   <script src="{{ asset('/public/admin/assets/js/plugins/chartjs.min.js') }}"></script>
   <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
-  <script src="{{ asset('public/admin/assets/js/argon-dashboard.js') }}"></script>
-  <script src="{{ asset('public/admin/assets/js/argon-dashboard.min.js') }}"></script>
+  {{-- <script src="{{ asset('public/admin/assets/js/argon-dashboard.js') }}"></script> --}}
+  {{-- <script src="{{ asset('public/admin/assets/js/argon-dashboard.js.map') }}"></script> --}}
+  {{-- <script src="{{ asset('public/admin/assets/js/argon-dashboard.min.js') }}"></script> --}}
   
-  <script>
-    var ctx1 = document.getElementById("chart-line").getContext("2d");
-
-    var gradientStroke1 = ctx1.createLinearGradient(0, 230, 0, 50);
-
-    gradientStroke1.addColorStop(1, 'rgba(94, 114, 228, 0.2)');
-    gradientStroke1.addColorStop(0.2, 'rgba(94, 114, 228, 0.0)');
-    gradientStroke1.addColorStop(0, 'rgba(94, 114, 228, 0)');
-    new Chart(ctx1, {
-      type: "line",
-      data: {
-        labels: ["Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-        datasets: [{
-          label: "Mobile apps",
-          tension: 0.4,
-          borderWidth: 0,
-          pointRadius: 0,
-          borderColor: "#5e72e4",
-          backgroundColor: gradientStroke1,
-          borderWidth: 3,
-          fill: true,
-          data: [50, 40, 300, 220, 500, 250, 400, 230, 500],
-          maxBarThickness: 6
-
-        }],
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-          legend: {
-            display: false,
-          }
-        },
-        interaction: {
-          intersect: false,
-          mode: 'index',
-        },
-        scales: {
-          y: {
-            grid: {
-              drawBorder: false,
-              display: true,
-              drawOnChartArea: true,
-              drawTicks: false,
-              borderDash: [5, 5]
-            },
-            ticks: {
-              display: true,
-              padding: 10,
-              color: '#fbfbfb',
-              font: {
-                size: 11,
-                family: "Open Sans",
-                style: 'normal',
-                lineHeight: 2
-              },
-            }
-          },
-          x: {
-            grid: {
-              drawBorder: false,
-              display: false,
-              drawOnChartArea: false,
-              drawTicks: false,
-              borderDash: [5, 5]
-            },
-            ticks: {
-              display: true,
-              color: '#ccc',
-              padding: 20,
-              font: {
-                size: 11,
-                family: "Open Sans",
-                style: 'normal',
-                lineHeight: 2
-              },
-            }
-          },
-        },
-      },
-    });
-  </script>
+  
   <script>
     var win = navigator.platform.indexOf('Win') > -1;
     if (win && document.querySelector('#sidenav-scrollbar')) {
@@ -341,6 +262,12 @@
       }
       Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
     }
+    
+  </script>
+  <script  src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+  <script>
+  
+    
   </script>
   <!-- Github buttons -->
   <script async defer src="https://buttons.github.io/buttons.js"></script>

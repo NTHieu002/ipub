@@ -14,4 +14,8 @@ class View extends Model
     ];
     protected $primaryKey = 'book_view_id';
     protected $table = 'book_view';
+
+    public function books() {
+        return $this->belongsTo(Books::class, 'book_id');
+    }
 }

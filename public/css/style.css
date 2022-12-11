@@ -9841,8 +9841,8 @@ textarea {
 
 .property-slider-wrap, .img-property-slide-wrap {
   position: relative; }
-  .property-slider-wrap .tns-outer .tns-inner, .img-property-slide-wrap .tns-outer .tns-inner {
-    padding-bottom: 100px !important; }
+  /* .property-slider-wrap .tns-outer .tns-inner, .img-property-slide-wrap .tns-outer .tns-inner {
+    padding-bottom: 100px !important; } */
   .property-slider-wrap .tns-nav, .img-property-slide-wrap .tns-nav {
     position: absolute;
     left: 50%;

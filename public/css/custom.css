@@ -47,3 +47,19 @@
   #next {
     float: right;
   }
+
+  #navigation {
+    margin-top: 100px;
+  }
+
+  #annotation_contents li {
+    list-style: none;
+    margin-bottom: 20px;
+    border-top: 1px solid #E2E2E2;
+    padding: 10px;
+  }
+
+  #annotation_contents li textarea {
+    width: 60%;
+    height: 100px !important;
+  }

@@ -40,22 +40,25 @@
                             <h2 id="author"></h2> --}}
                             <div id="toc"></div>
                         </div>
-                        
+
                     </div>
                     <div id="frame" class="col-lg-9">
-                        
+
                         <div id="viewer">
-    
+
                         </div>
                         <div id="pagination">
-                          <a id="prev" href="#prev" class="arrow">Prev</a>
-                          <a id="next" href="#next" class="arrow">Next</a>
+                            <a id="prev" href="#prev" class="arrow">Prev</a>
+                            <a id="next" href="#next" class="arrow">Next</a>
                         </div>
                     </div>
                     <div id="extras" class="col-lg-9">
+                        <ul id="annotation_contents"></ul>
+                    </div> 
+                    <div id="extras" class="col-lg-9">
                         <ul id="highlights"></ul>
                     </div>
-                    
+
                 </div>
             </div>
         </div>
@@ -197,17 +200,17 @@
             title.textContent = meta.title;
             author.textContent = meta.creator;
         })
-    
+
         var rendition = book.renderTo("viewer", {
-          width: "100%",
-          height: 620,
-          ignoreClass: 'annotator-hl',
-           manager: "continuous",
-        //   flow: "scrolled-doc"
+            width: "100%",
+            height: 620,
+            ignoreClass: 'annotator-hl',
+            manager: "continuous",
+            //   flow: "scrolled-doc"
         });
-    
+
         var displayed = rendition.display();
-    
+
         // Navigation loaded
         // book.loaded.navigation.then(function(toc){
         //   console.log('toc',toc);
@@ -248,95 +251,135 @@
             }
 
         });
-    
+
         var next = document.getElementById("next");
-        next.addEventListener("click", function(){
-          rendition.next();
-        }, false);
-    
-        var prev = document.getElementById("prev");
-        prev.addEventListener("click", function(){
-          rendition.prev();
-        }, false);
-    
-        var keyListener = function(e){
-    
-          // Left Key
-          if ((e.keyCode || e.which) == 37) {
-            rendition.prev();
-          }
-    
-          // Right Key
-          if ((e.keyCode || e.which) == 39) {
+        next.addEventListener("click", function() {
             rendition.next();
-          }
-    
+        }, false);
+
+        var prev = document.getElementById("prev");
+        prev.addEventListener("click", function() {
+            rendition.prev();
+        }, false);
+
+        var keyListener = function(e) {
+
+            // Left Key
+            if ((e.keyCode || e.which) == 37) {
+                rendition.prev();
+            }
+
+            // Right Key
+            if ((e.keyCode || e.which) == 39) {
+                rendition.next();
+            }
+
         };
-    
+
         rendition.on("keyup", keyListener);
         document.addEventListener("keyup", keyListener, false);
-    
-        rendition.on("relocated", function(location){
-          // console.log(location);
+
+        rendition.on("relocated", function(location) {
+            // console.log(location);
         });
-    
-    
+
+
         // Apply a class to selected text
         rendition.on("selected", function(cfiRange, contents) {
-          rendition.annotations.highlight(cfiRange, {}, (e) => {
-            console.log("highlight clicked", e.target);
-          });
-          contents.window.getSelection().removeAllRanges();
-    
+            rendition.annotations.highlight(cfiRange, {}, (e) => {
+                console.log("highlight clicked", e.target);
+            });
+            contents.window.getSelection().removeAllRanges();
+
         });
-    
+
         this.rendition.themes.default({
-          '::selection': {
-            'background': 'rgba(255,255,0, 0.3)'
-          },
-          '.epubjs-hl' : {
-            'fill': 'yellow', 'fill-opacity': '0.3', 'mix-blend-mode': 'multiply'
-          }
+            '::selection': {
+                'background': 'rgba(255,255,0, 0.3)'
+            },
+            '.epubjs-hl': {
+                'fill': 'yellow',
+                'fill-opacity': '0.3',
+                'mix-blend-mode': 'multiply'
+            }
         });
-    
+
         // Illustration of how to get text from a saved cfiRange
         var highlights = document.getElementById('highlights');
-    
+        var annotation_contents = document.getElementById('annotation_contents');
+
         rendition.on("selected", function(cfiRange) {
-    
-          book.getRange(cfiRange).then(function (range) {
-            var text;
+
             var li = document.createElement('li');
-            var a = document.createElement('a');
-            var remove = document.createElement('a');
-            var textNode;
-    
-            if (range) {
-              text = range.toString();
-              textNode = document.createTextNode(text);
-    
-              a.textContent = cfiRange;
-              a.href = "#" + cfiRange;
-              a.onclick = function () {
-                rendition.display(cfiRange);
-              };
-    
-              remove.textContent = "remove";
-              remove.href = "#" + cfiRange;
-              remove.onclick = function () {
-                rendition.annotations.remove(cfiRange);
-                return false;
-              };
-    
-              li.appendChild(a);
-              li.appendChild(textNode);
-              li.appendChild(remove);
-              highlights.appendChild(li);
-            }
-    
-          })
-    
+            const input = document.createElement("textarea");
+            input.setAttribute("type", "textarea");
+            input.setAttribute("class", "annotation");
+            input.setAttribute("placeholder", "annotation");
+            li.appendChild(input);
+            annotation_contents.appendChild(li);
+            handleForm(cfiRange,  input);
+           
+
         });
-    
-      </script>
+
+        async function handleForm(cfiRange, input) {
+            console.log('Before getting the user input: ');
+            input = await getUserInput();
+            
+            book.getRange(cfiRange).then(function(range) {
+                var text;
+                var li = document.createElement('li');
+                var a = document.createElement('a');
+                var remove = document.createElement('a');
+                var textNode;
+
+                if (range) {
+                    text = range.toString();
+                    textNode = document.createTextNode(text);
+
+
+                    if(input != '') {
+                        a.textContent = input;
+                    }else {
+                        a.textContent = "No annotation";
+                    }
+                    console.log('After getting user input: ',$('annotation').value);
+                    a.href = "#" + cfiRange;
+                    a.onclick = function() {
+                        rendition.display(cfiRange);
+                    };
+
+                    remove.textContent = "Remove";
+                    remove.href = "#" + cfiRange;
+                    remove.onclick = function() {
+                        rendition.annotations.remove(cfiRange, 'highlight');
+                        highlights.removeChild(li);
+                        console.log(li);
+                        return true;
+                    };
+
+                    
+                    li.appendChild(a);
+                    // li.appendChild(input);
+                    li.appendChild(textNode);
+                    li.appendChild(remove);
+                    highlights.appendChild(li);
+                    annotation_contents.removeChild(annotation_contents.firstElementChild);
+                }
+
+            })
+        };
+
+        function getUserInput() {
+            return new Promise((resolve, reject) => {
+                $('.annotation').keydown(function(e) {
+                    if (e.keyCode == 13) {
+                        const inputVal = $(this).val();
+                        resolve(inputVal);
+                    }
+                });
+            });
+        };
+
+    </script>
 @endsection

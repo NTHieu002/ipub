@@ -14,10 +14,10 @@
       var ps1 = new PerfectScrollbar(sidebar);
     };
 
-    if (document.getElementsByClassName('navbar-collapse')[0]) {
-      var fixedplugin = document.querySelector('.navbar:not(.navbar-expand-lg) .navbar-collapse');
-      var ps2 = new PerfectScrollbar(fixedplugin);
-    };
+    // if (document.getElementsByClassName('navbar-collapse')[0]) {
+    //   var fixedplugin = document.querySelector('.navbar:not(.navbar-expand-lg) .navbar-collapse');
+    //   var ps2 = new PerfectScrollbar(fixedplugin);
+    // };
 
     if (document.getElementsByClassName('fixed-plugin')[0]) {
       var fixedplugin = document.querySelector('.fixed-plugin');
@@ -367,9 +367,9 @@ function debounce(func, wait, immediate) {
 };
 
 // Toggle Sidenav
-const iconNavbarSidenav = document.getElementById('iconNavbarSidenav');
-const iconSidenav = document.getElementById('iconSidenav');
-const sidenav = document.getElementById('sidenav-main');
+var iconNavbarSidenav = document.getElementById('iconNavbarSidenav');
+var iconSidenav = document.getElementById('iconSidenav');
+var sidenav = document.getElementById('sidenav-main');
 let body = document.getElementsByTagName('body')[0];
 let className = 'g-sidenav-pinned';
 
@@ -752,3 +752,4 @@ function darkMode(el) {
     el.removeAttribute("checked");
   }
 };
+

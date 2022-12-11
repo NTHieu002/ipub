@@ -13,25 +13,6 @@ use Carbon\Carbon;
 class AdminController extends Controller
 {
 
-    // // Function to get the client IP address
-    // function get_client_ip() {
-    //     $ipaddress = '';
-    //     if (getenv('HTTP_CLIENT_IP'))
-    //         $ipaddress = getenv('HTTP_CLIENT_IP');
-    //     else if(getenv('HTTP_X_FORWARDED_FOR'))
-    //         $ipaddress = getenv('HTTP_X_FORWARDED_FOR');
-    //     else if(getenv('HTTP_X_FORWARDED'))
-    //         $ipaddress = getenv('HTTP_X_FORWARDED');
-    //     else if(getenv('HTTP_FORWARDED_FOR'))
-    //         $ipaddress = getenv('HTTP_FORWARDED_FOR');
-    //     else if(getenv('HTTP_FORWARDED'))
-    //     $ipaddress = getenv('HTTP_FORWARDED');
-    //     else if(getenv('REMOTE_ADDR'))
-    //         $ipaddress = getenv('REMOTE_ADDR');
-    //     else
-    //         $ipaddress = 'UNKNOWN';
-    //     return $ipaddress;
-    // }
     public function dashboard(Request $request) {
         $user_ip_address = $_SERVER['REMOTE_ADDR'];
         $visit_tor_current = Visitor::where('ip_address', $user_ip_address)->get();
@@ -51,9 +32,11 @@ class AdminController extends Controller
         foreach($views as $view) {
             $total_view = $view->book_views + $total_view;
         }
-        
-        return view('admin.pages.dashboard')->with('slug','dashboard')->with('total_visit', $visitor_total)->with('online', $visitor_count)
-        ->with('total_view', $total_view);
+
+        $books = View::with('books')->orderByDesc('book_views')->limit(10)->get();
+
+        return view('admin.pages.dashboard')->with('slug','Dashboard')->with('total_visit', $visitor_total)->with('online', $visitor_count)
+        ->with('total_view', $total_view)->with('books', $books);
     }
 
     public function profile () {

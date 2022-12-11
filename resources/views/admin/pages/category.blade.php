@@ -73,8 +73,15 @@
         {{ session('status')}}
     </div>
 @endif
-
 <script type="text/javascript">
+$(document).ready(function() {
+            var side_bar_item_active = $("ul li.nav-item a.active");
+            // side_bar_item.addClass('hello')
+            // side_bar_item.removeClass('active');
+            var side_bar_item = $("#category");
+            side_bar_item_active.removeClass('active');
+            side_bar_item.addClass('active');
+        });
   const myTimeout = setTimeout(myGreeting, 2000);
 
   function myGreeting() {
