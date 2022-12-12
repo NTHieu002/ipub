@@ -209,8 +209,8 @@
             //   flow: "scrolled-doc"
         });
 
+        // rendition.themes.default({ "body": { "color": "purple"}})
         var displayed = rendition.display();
-
         // Navigation loaded
         // book.loaded.navigation.then(function(toc){
         //   console.log('toc',toc);

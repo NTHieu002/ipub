@@ -75,7 +75,7 @@
 					<form action="{{ url('/store-book-user/'.$user_info->id) }}" method="post" enctype="multipart/form-data">
                         @csrf
                         @if ($errors->any())
-                            <div class="alert alert-danger col-4">
+                            <div class="alert alert-danger col-6">
                                 <ul>
                                     @foreach ($errors->all() as $error)
                                         <li>{{ $error }}</li>
@@ -84,8 +84,13 @@
                             </div>
                         @endif
                         @if(session('status'))
-                            <div class="alert alert-success col-4">
+                            <div class="alert alert-success col-6">
                                 {{ session('status')}}
+                            </div>
+                        @endif
+                        @if(session('status_failed'))
+                            <div class="alert alert-danger col-6">
+                                {{ session('status_failed')}}
                             </div>
                         @endif
 						<div class="row">
@@ -96,7 +101,7 @@
                                 <input type="hidden" name="book-slug" class="form-control" placeholder="Book Slug" id="convert_slug">
                             </div>
                             <div class="col-8 mb-3">
-								<input type="file" class="form-control" placeholder="Book Name" name="book">
+								<input accept="application/epub" type="file" class="form-control" placeholder="Book Name" name="book">
 							</div>
 							<div class="col-12">
 								<input type="submit" value="Upload now" class="btn btn-primary">

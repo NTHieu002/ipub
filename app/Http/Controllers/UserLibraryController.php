@@ -76,23 +76,26 @@ class UserLibraryController extends Controller
         $get_book = $request->book;
         $get_name_book = $get_book->getClientOriginalName();
         $name_book = current(explode('.',$get_name_book));
-        $new_book = $name_book.rand(0,99). '.' .$get_book->getClientOriginalExtension();
-        $get_book->move($path_book,$new_book);
-        
-        
-        //$book->book_image = $new_img;
-        $book->book = $new_book;
-        
-        $book->save();
-        
-        $book_id = $book->id;
-        $userlibrary = new Userlibrary();
-        $userlibrary->book_id = $book_id;
-        $userlibrary->user_id = $user_id;
-        $userlibrary->save();
-
-        
-        return redirect('/my-library/'.$user_id)->with('status','upload success');
+        if($get_book->getClientOriginalExtension()== 'epub') {
+            $new_book = $name_book.rand(0,99). '.' .$get_book->getClientOriginalExtension();
+            $get_book->move($path_book,$new_book);
+            
+            
+            //$book->book_image = $new_img;
+            $book->book = $new_book;
+            
+            $book->save();
+            
+            $book_id = $book->id;
+            $userlibrary = new Userlibrary();
+            $userlibrary->book_id = $book_id;
+            $userlibrary->user_id = $user_id;
+            $userlibrary->save();
+    
+            
+            return redirect('/my-library/'.$user_id)->with('status','upload success');
+        }
+        return redirect('/my-library/'.$user_id)->with('status_failed','please choose ebook');
     }
 
     /**

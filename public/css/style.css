@@ -10118,7 +10118,7 @@ textarea {
 #property-nav {
   position: absolute;
   width: 100%;
-  bottom: 64px; }
+  bottom: 0; }
   #property-nav span {
     display: inline-block;
     cursor: pointer;
